@@ -1,8 +1,9 @@
-var fs=require("fs");
+var fs=require("fs"),
+    cfg = require("./conf/comm.json");
 
 console.log("file listener start!");
 
-var cwd=process.cwd();
+var cwd = process.cwd();
 function startWith(str, test) {
     if (str === test) {
         return true;
@@ -18,12 +19,14 @@ function startWith(str, test) {
     }
     return true;
 }
-
-if (false) {
-    t1();
-} else {
+if (cfg.file_changed_watch) {
     t2();
 }
+/*
+else {
+    t1();
+}
+*/
 
 // 使用filewatch监控
 function t1() {
@@ -48,7 +51,7 @@ function t1() {
         process.exit(1);
     }
 }
-//定时器监控
+// 定时器监控
 function t2() {
     var ltime = new Date().getTime();
 
@@ -73,7 +76,7 @@ function t2() {
                             var mtime = stat.mtime;
                             if (new Date(mtime).getTime() > ltime) {
                                 // 记录日志并且进程退出
-                                console.log("file changed,restart now!");
+                                console.log(arr[i] + " - file changed,restart now!");
                                 process.exit(1);
                             } else {
                                 if (i--) {

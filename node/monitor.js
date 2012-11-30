@@ -1,3 +1,4 @@
+require('./monitor/module_listener.js');
 (function(){
     // 开始心跳，与父进程联系
     if (process.argv && process.argv.length) {
@@ -25,6 +26,7 @@
 
         // 心跳消息处理
         process.on("message", function(message) {
+            console.log('child receive msg: ' + message);
             if (typeof message == "object") {
                 if (message.name == "proccessInfo") {
                     process.send({
@@ -50,7 +52,6 @@
 
         // 心跳检查
         function checkParent() {
-            console.log('checkParent');
             // 做1500毫秒等待，判断deamon子进程是否挂掉
             heartbeatTimer = setTimeout(function() {
                 times++;

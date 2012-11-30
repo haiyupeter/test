@@ -198,7 +198,7 @@ deamon.prototype = {
                 //console.log(memInfo);
             }, times > 0 ? "retry with times:" + times : "");
         }
-        //每5秒获取下
+        //每5秒获取一下
         this.__heartbeat = setInterval(checkDeamon, 5000);
     },
     //停止心跳
