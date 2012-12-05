@@ -31,9 +31,11 @@ if (process.argv && process.argv.length) {
         }
     }
 }
-// 默认模块
+// 可以在此处设置默认载入默认模块
 if (modulesNames.length == 0) {
-    modulesNames.push('main');
+    console.log('please defined the modules like: node bootstrap.js -m main1.js -m main2.js');
+    return;
+    // modulesNames.push('main');
 }
 
 console.log(modulesNames);
